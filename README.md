@@ -1,1 +1,1 @@
-![Output](images/stage1_get.png)
+![GET API ][Output](images/stage1_get.png)
