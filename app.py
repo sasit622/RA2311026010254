@@ -4,10 +4,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Local storage (acts like DB)
+
 notifications = []
 
-# ---------------- CREATE NOTIFICATION ----------------
+
 @app.route('/api/notifications', methods=['POST'])
 def create_notification():
     data = request.get_json()
@@ -33,7 +33,6 @@ def create_notification():
     }), 201
 
 
-# ---------------- GET USER NOTIFICATIONS ----------------
 @app.route('/api/notifications/<user_id>', methods=['GET'])
 def get_notifications(user_id):
     user_notifications = [n for n in notifications if n["userId"] == user_id]
@@ -43,7 +42,6 @@ def get_notifications(user_id):
     }), 200
 
 
-# ---------------- MARK AS READ ----------------
 @app.route('/api/notifications/<notif_id>/read', methods=['PUT'])
 def mark_as_read(notif_id):
     for n in notifications:
@@ -54,7 +52,6 @@ def mark_as_read(notif_id):
     return jsonify({"error": "Notification not found"}), 404
 
 
-# ---------------- DELETE NOTIFICATION ----------------
 @app.route('/api/notifications/<notif_id>', methods=['DELETE'])
 def delete_notification(notif_id):
     global notifications
@@ -63,6 +60,5 @@ def delete_notification(notif_id):
     return jsonify({"message": "Deleted successfully"}), 200
 
 
-# ---------------- RUN SERVER ----------------
 if __name__ == '__main__':
     app.run(debug=True)
